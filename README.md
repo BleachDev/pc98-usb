@@ -1,4 +1,3 @@
-
 # PC-98 To USB Converter
 
 This converter allows PC-98 keyboards to be connected to modern computers via an Arduino
@@ -8,7 +7,7 @@ This converter allows PC-98 keyboards to be connected to modern computers via an
 1. Connect your keyboard to your Arduino according to the chart below, you can move the pins if you also change them in the Arduino code.
 <details>
 <summary>Connection Chart</summary>
-<img src="https://github.com/BleachDev/pc98-usb/assets/36450388/82309194-2d2c-422e-bab7-67e6709e4af6">
+<img src="https://github.com/BleachDev/pc98-usb/assets/36450388/6c83c56b-1e3a-446d-b85e-1682611713d5">
 </details>
 
 2. Upload `pc98_usb.ino` to your Arduino
@@ -16,7 +15,7 @@ This converter allows PC-98 keyboards to be connected to modern computers via an
 4. Your Arduino/PC-98 Keyboard should act like a USB keyboard.
 
 ## Layout
-![layout](https://github.com/BleachDev/pc98-usb/assets/36450388/37f0fb0f-8e3a-4e45-aff5-76e4446f818c)
+![layout](https://github.com/BleachDev/pc98-usb/assets/36450388/837dee00-ea44-45c0-b447-62d017e1a9f3)
 Brown = Only found on PC-98XL  
 Cyan = Only found on newer models  
 Red = Key remappings when standardize mode is enabled
@@ -60,7 +59,7 @@ As a result there is a ~20ms delay (can be changed) when typing but its barely n
 
 ## Typing demo
 
-https://github.com/BleachDev/pc98-usb/assets/36450388/fe17ed0a-2b38-473e-a3f6-767af67debd1
+https://github.com/BleachDev/pc98-usb/assets/36450388/0ff3c7af-e43e-4396-b125-c07a183484c3
 
 ## Notes
 
