@@ -1,8 +1,9 @@
 // PC98 To USB Keyboard Adapter
 // By Bleach
 
-#define STANDARDIZE_LAYOUT // Replaces some key actions to make it more closer to a standard keyboard
 #define REPEAT_TIMEOUT 20 // How many ms to wait before releasing a key (The PC98 Internal repeat is ~60ms per cycle but as low as 5 seems to work?)
+#define STANDARDIZE_LAYOUT // Replaces some key actions to make it more closer to a standard keyboard
+//#define STANDARDIZE_DELETE // Switches the place of Delete and Page Up to be the same as standard keyboards (You probably want to swap the keycaps if you enable this)
 
 #define RST 2 // Reset request
 #define RXD 3 // Data
@@ -74,17 +75,21 @@ void processKey() {
   }
 
   uint8_t usbCode = pc98toUsb(code & 0x7F);
+  uint8_t originalUsbCode = usbCode;
   #ifdef STANDARDIZE_LAYOUT
-    usbCode = usbToStandard(usbCode);
+    usbCode = standardizeUsb(usbCode);
+  #endif
+  #ifdef STANDARDIZE_DELETE
+    usbCode = swapDelete(usbCode);
   #endif
   
   // The CAPS & KANA keys don't send release scancodes so we press and release them at the same time.
-  bool lockKey = (usbCode == 0x39) || (usbCode == 0x88);
+  bool lockKey = (originalUsbCode == 0x39) || (originalUsbCode == 0x88);
 
   // MODIFIERS
   // Modifiers don't send repeat make/break codes so we don't
   // worry about release timings for them.
-  if ((usbCode >= 0xE0) && (usbCode <= 0xE7)) {
+  if ((originalUsbCode >= 0xE0) && (originalUsbCode <= 0xE7)) {
     usbData[0] ^= (1 << (usbCode - 0xE0));
     Serial.write(usbData, 8);
   } else {
@@ -295,7 +300,7 @@ uint8_t pc98toUsb(uint8_t scancode) {
   }
 }
 
-uint8_t usbToStandard(uint8_t scancode) {
+uint8_t standardizeUsb(uint8_t scancode) {
   switch (scancode) {
     case 0xE2: return 0xE3; /* GRPH (LALT) -> LGUI */
     case 0x8B: return 0xE2; /* NFER -> LALT */
@@ -304,6 +309,14 @@ uint8_t usbToStandard(uint8_t scancode) {
     case 0x7C: return 0x29; /* COPY -> ESC */
     case 0x89: return 0x2A; /* YEN -> BACKSPACE (For a wider backspace) */
     case 0x87: return 0x64; /* RO -> ISO \| */
+    default: return scancode;
+  }
+}
+
+uint8_t swapDelete(uint8_t scancode) {
+  switch (scancode) {
+    case 0x4B: return 0x4C; /* ROLL/PAGE UP -> DELETE */
+    case 0x4C: return 0x4B; /* DELETE -> ROLL/PAGE UP */
     default: return scancode;
   }
 }
