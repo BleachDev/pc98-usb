@@ -11,14 +11,11 @@ This converter allows PC-98 keyboards to be connected to modern computers via an
 </details>
 
 2. Upload `pc98_usb.ino` to your Arduino
-3. Short your Arduino then flash `Arduino-keyboard-0.3.hex` to it using dfu-programmer or Flip (You can undo it by flashing `Arduino-usbserial-uno.hex`)
+3. Short your Arduino then flash `Arduino-keyboard-0.3.hex` to it using [dfu-programmer](https://github.com/dfu-programmer/dfu-programmer) or [Flip](https://www.microchip.com/en-us/development-tool/FLIP) (You can undo it by flashing `Arduino-usbserial-uno.hex`)
 4. Your Arduino/PC-98 Keyboard should act like a USB keyboard.
 
 ## Layout
-![layout](https://github.com/BleachDev/pc98-usb/assets/36450388/837dee00-ea44-45c0-b447-62d017e1a9f3)
-Brown = Only found on PC-98XL  
-Cyan = Only found on newer models  
-Red = Key remappings when standardize mode is enabled
+![layout](https://github.com/BleachDev/pc98-usb/assets/36450388/c0c967cd-da7b-4da0-9bdd-a9b019c99cf4)
 
 ## Commands
 
