@@ -11,7 +11,9 @@ This converter allows PC-98 keyboards to be connected to modern computers via an
 </details>
 
 2. Upload `pc98_usb.ino` to your Arduino
-3. Short your Arduino then flash `Arduino-keyboard-0.3.hex` to it using [dfu-programmer](https://github.com/dfu-programmer/dfu-programmer) or [Flip](https://www.microchip.com/en-us/development-tool/FLIP) (You can undo it by flashing `Arduino-usbserial-uno.hex`)
+3. [Enable DFU Programmer mode](https://docs.arduino.cc/hacking/software/DFUProgramming8U2) then flash `Arduino-keyboard-0.3.hex` to your Arduino using [dfu-programmer](https://github.com/dfu-programmer/dfu-programmer) or [Flip](https://www.microchip.com/en-us/development-tool/FLIP)  
+3.2 `sudo dfu-programmer atmega16u2 erase`  
+3.3 `sudo dfu-programmer atmega16u2 flash Arduino-keyboard-0.3.hex` (Flash `Arduino-usbserial-uno.hex` to return to arduino mode)
 4. Your Arduino/PC-98 Keyboard should act like a USB keyboard.
 
 ## Layout
